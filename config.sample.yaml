@@ -1,0 +1,10 @@
+error_handling: ignore
+consumer_server: localhost:9092
+consumer_topic: connect-test
+producer_topic: connect-test-out
+producer_server: localhost:9092
+group_id: smt_group1
+classname: mysmt.Myclass
+loglevel: info
+properties:
+  myprop: 1

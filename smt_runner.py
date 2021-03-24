@@ -43,8 +43,8 @@ for message in consumer:
         # write to new topic
         producer.send(config['producer_topic'], transformed_message)
 
-    except KafkaError as e:
-        logging.error("kafka error")
+    except Error as e:
+        logging.error("transform error")
         logging.error(e)
         if not config["error_handling"] == "ignore":
             raise ValueError("error in transform")

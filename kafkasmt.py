@@ -7,7 +7,7 @@ class KafkaSmt:
         pass
 
     def transform(self, message: bytes) -> bytes:
-        return json.dumps(self.transformJson(message.decode())).encode()
+        return json.dumps(self.transformJson(json.loads(message.decode()))).encode()
 
     def transformJson(self, message: Dict) -> Dict:
         return message

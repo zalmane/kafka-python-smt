@@ -1,3 +1,4 @@
+import sys
 from kafka import KafkaConsumer, KafkaProducer
 from json import loads
 from pydoc import locate
@@ -7,7 +8,16 @@ import logging
 import yaml
 
 # read config
-with open("/app/config.yaml", 'r') as stream:
+if len(sys.argv) > 1:
+    # read from command line
+    if sys.argv[1] == "-h" or sys.argv[1] == "--help" or sys.argv[1] == "-?":
+        print("to use: python smt_runner.py <path to yaml config file>")
+        sys.exit()
+    else:
+        configfile = sys.argv[1]
+else:
+    configfile = "/app/config.yaml"
+with open(configfile, 'r') as stream:
     try:
         config = yaml.safe_load(stream)
     except yaml.YAMLError as exc:

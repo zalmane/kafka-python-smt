@@ -39,11 +39,11 @@ for message in consumer:
     logging.debug(message.value)
     try:
         transformed_message = transformer.transform(message.value)
-        logging.debug(transformed_message)
+        logging.info(transformed_message)
         # write to new topic
         producer.send(config['producer_topic'], transformed_message)
 
-    except Error as e:
+    except Exception as e:
         logging.error("transform error")
         logging.error(e)
         if not config["error_handling"] == "ignore":

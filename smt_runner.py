@@ -50,8 +50,10 @@ for message in consumer:
     try:
         transformed_message = transformer.transform(message.value)
         logging.info(transformed_message)
-        # write to new topic
-        producer.send(config['producer_topic'], transformed_message)
+
+        # write to new topic if we need to
+        if "producer_topic" in config and config["producer_topic"]!="":
+            producer.send(config['producer_topic'], transformed_message)
 
     except Exception as e:
         logging.error("transform error")
